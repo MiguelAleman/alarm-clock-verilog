@@ -1,9 +1,10 @@
 module test_comparator_module();
-	reg [12:0] CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6;	
+	reg [12:0] CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6;
+	reg [2:0] CD;	
 	// Activate Alarm Output
 	wire AA;
 	parameter sim_time = 110;
-	comparators_module comp_module (AA, CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6);		
+	comparators_module comp_module (AA, CD, CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6);		
 	initial #sim_time $finish;				
 	initial begin
 		Q_r0 = 13'b1111111111111;
@@ -14,8 +15,13 @@ module test_comparator_module();
 		Q_r5 = 13'b1111111101111;
 		Q_r6 = 13'b1111111011111;
 		CT = 13'b1111111111111;
+		CD = 3'b000;
+		#10;
+		CD = 3'b001;
 		#10;
 		CT = 13'b1111111111110;
+		#10;
+		CD = 3'b001;
 		#10;
 		CT = 13'b1000111111111;
 		#10;
@@ -27,10 +33,12 @@ module test_comparator_module();
 		#10;
 		CT = 13'b1111111101111;
 		#10;
+		CD = 3'b101;
+		#10;
 		CT = 13'b1000001111111;
 	end
 	initial begin
-		$display(" CT             R0           R1            R2            R3            R4            R5            R6           AA");			
-		$monitor(" %b %b %b %b %b %b %b %b %b", CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6, AA);	
+		$display(" CD   CT             R0           R1            R2            R3            R4            R5            R6           AA");			
+		$monitor(" %b %b %b %b %b %b %b %b %b %b", CD, CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6, AA);	
 	end
 endmodule

@@ -1,9 +1,9 @@
-module test_decoder_8();
+module test_decoder_8bits();
 	reg [2:0] S;
 	reg enable;
 	wire [7:0] Y;	
 	parameter sim_time = 630;
-	decoder_8 dec (Y, S, enable);
+	decoder_8bits dec (Y, S, enable);
 	initial #sim_time $finish;				
 	initial begin
 		enable = 1'b0;

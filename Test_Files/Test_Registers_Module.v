@@ -1,4 +1,4 @@
-module test_register_32bits();
+module test_register_module();
 	// Clear, Clock, Enable
 	reg [2:0] CCE;	
 	reg [2:0] STO;

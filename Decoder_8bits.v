@@ -1,5 +1,5 @@
 // Enable activo alto
-module decoder_8(output reg [7:0] Y, input [2:0] S, input enable);
+module decoder_8bits(output reg [7:0] Y, input [2:0] S, input enable);
 	always @ (S, enable)
 		begin		
 			if(enable)

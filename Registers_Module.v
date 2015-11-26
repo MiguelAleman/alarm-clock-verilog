@@ -2,7 +2,7 @@ module registers_module(output [12:0] Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6, 
 		
 		// Decoder
 		wire [7:0] RE;
-		decoder_8 decoder (RE, STO, LD_R);
+		decoder_8bits decoder (RE, STO, LD_R);
 		
 		// Registers
 		

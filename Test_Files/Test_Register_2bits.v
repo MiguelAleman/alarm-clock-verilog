@@ -1,4 +1,4 @@
-module test_register_32bits();
+module test_register_2bits();
 	reg [2:0] CCE;	// Clear, Clock, Enable
 	reg [1:0] D;
 	wire [1:0] Q;

@@ -4,7 +4,7 @@ module test_comparator_module();
 	// Activate Alarm Output
 	wire AA;
 	parameter sim_time = 110;
-	comparators_module comp_module (AA, CD, CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6);		
+	comparators_module comp_module (AA, CD, CT, Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0);		
 	initial #sim_time $finish;				
 	initial begin
 		Q_r0 = 13'b1111111111111;

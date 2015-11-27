@@ -7,7 +7,7 @@ module test_register_module();
 	// 7 Registers Output
 	wire [12:0] Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6;
 	parameter sim_time = 110;
-	registers_module reg_module (Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6, STO, D, CCE[2], CCE[1], CCE[0]);		
+	registers_module reg_module (Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0, STO, D, CCE[2], CCE[1], CCE[0]);		
 	initial #sim_time $finish;				
 	initial begin
 		D = 13'b0000111111111;
@@ -35,7 +35,7 @@ module test_register_module();
 		CCE = 3'b111;
 	end
 	initial begin
-		$display(" Clear  Clock  Enable  D              Q_r0            Q_r1          Q_r2          Q_r3          Q_r4            Q_r5            Q_r6");			
-		$monitor(" %b         %b         %b %b %b %b %b %b %b %b %b", CCE[2], CCE[1], CCE[0], D, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6);	
+		$display(" Clear  Clock  Enable  ST0   D              Q_r0            Q_r1          Q_r2          Q_r3          Q_r4            Q_r5            Q_r6");			
+		$monitor(" %b         %b         %b  %b %b %b %b %b %b %b %b %b", CCE[2], CCE[1], CCE[0], STO, D, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6);	
 	end
 endmodule

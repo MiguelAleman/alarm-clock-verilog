@@ -4,7 +4,7 @@ module counter_0_23(output reg [4:0] COUNT, input IN_4, IN_3, IN_2, IN_1, IN_0, 
 	initial begin
 		COUNT <= 5'b00000;
 	end
-	always @ (posedge Clk, negedge Clr)
+	always @ (posedge Clk, negedge Clr, posedge LD)
 		if (!Clr) COUNT <= 5'b00000;
 		else if (LD & Enable) begin
 			COUNT[0] = IN_0;

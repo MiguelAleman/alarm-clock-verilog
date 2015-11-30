@@ -38,6 +38,7 @@ module test_comparator_module();
 		CT = 13'b1000001111111;
 	end
 	initial begin
+		$display("TEST COMPARATOR MODULE");
 		$display(" CD   CT             R0           R1            R2            R3            R4            R5            R6           AA");			
 		$monitor(" %b %b %b %b %b %b %b %b %b %b", CD, CT, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6, AA);	
 	end

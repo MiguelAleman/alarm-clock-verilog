@@ -3,7 +3,7 @@
 # Select all the files in current dir that ends with '.v'
 args="$(ls | grep ".*\.v" | xargs)"
 iverilog $args
-echo "Executing a.out"
+echo -e "\nExecuting a.out\n"
 ./a.out
-echo "Removing a.out"
+echo -e "\nRemoving a.out\n"
 rm a.out

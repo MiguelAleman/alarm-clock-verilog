@@ -22,6 +22,7 @@ module test_register_module();
 		repeat (100) #10 CCE[1] = ~CCE[1];
 	end
 	initial begin
+		$display("TEST CURRENT TIME MODULE");
 		$display(" Clear  Clock  Enable  LD  CTI           Current_Time");			
 		$monitor(" %b         %b         %b  %b %b %d %d : %d%d ", CCE[2], CCE[1], CCE[0],LD, CTI, CTO[14:12], CTO[11:7], CTO[6:4], CTO[3:0]);	
 	end

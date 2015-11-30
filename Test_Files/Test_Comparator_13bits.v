@@ -16,6 +16,7 @@ module test_comparator_13bits();
 		#10;
 	end
 	initial begin
+		$display("TEST COMPARATOR 13 BITS");
 		$display(" A               B              EQ");
 	    $monitor(" %b   %b   %b", A, B, EQ);	
 	end

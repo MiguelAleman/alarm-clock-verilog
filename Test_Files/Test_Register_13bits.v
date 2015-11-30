@@ -21,6 +21,7 @@ module test_register_13bits();
 		CCE = 3'b110;
 	end
 	initial begin
+		$display("TEST REGISTER 13 BITS");
 		$display(" Clear  Clock  Enable D              Q            Q_n");			
 		$monitor(" %b         %b         %b %b %b %b", CCE[2], CCE[1], CCE[0], D, Q, Q_n);	
 	end

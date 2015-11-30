@@ -15,6 +15,7 @@ module test_decoder_8bits();
 		repeat (7) #10 S = S + 3'b001;
 	end
 	initial begin
+		$display("TEST DECODER 8 BITS");
 		$display(" S2   S1  S0  Enable     Y");
 	    $monitor(" %b     %b   %b     %b   %b ", S[2], S[1], S[0], enable, Y);	
 	end

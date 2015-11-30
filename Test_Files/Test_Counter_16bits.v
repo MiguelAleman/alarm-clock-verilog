@@ -1,4 +1,4 @@
-module test_comparator_16bits();
+module test_counter_16bits();
 	reg Clr, Clk;
 	wire [15:0] COUNT;	
 	parameter sim_time = 630;
@@ -13,6 +13,7 @@ module test_comparator_16bits();
 		repeat (20) #10 Clk <= ~Clk;
 	end
 	initial begin
+		$display("TEST COUNTER 16 BITS");
 		$display(" Clr   Clk  COUNT");
 	    $monitor(" %b     %b   %b",Clr, Clk, COUNT);	
 	end

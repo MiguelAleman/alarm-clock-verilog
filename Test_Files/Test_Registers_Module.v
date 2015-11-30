@@ -35,6 +35,7 @@ module test_register_module();
 		CCE = 3'b111;
 	end
 	initial begin
+		$display("TEST REGISTERS MODULE");
 		$display(" Clear  Clock  Enable  ST0   D              Q_r0            Q_r1          Q_r2          Q_r3          Q_r4            Q_r5            Q_r6");			
 		$monitor(" %b         %b         %b  %b %b %b %b %b %b %b %b %b", CCE[2], CCE[1], CCE[0], STO, D, Q_r0, Q_r1, Q_r2, Q_r3, Q_r4, Q_r5, Q_r6);	
 	end

@@ -1,4 +1,4 @@
-module set_time_module(output [14:0] STO, input [14:0] CTI, input [12:0] Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0, input CLEAR, TOF, S0, LD_ID, CLEAR_ST, LD_DAY, LD_TIME, EN_ST, IH, IM, LD_O_F);
+module set_time_module(output [15:0] STO, input [14:0] CTI, input [12:0] Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0, input CLEAR, TOF, S0, LD_ID, CLEAR_ST, LD_DAY, LD_TIME, EN_ST, IH, IM, LD_O_F);
 	wire [12:0] mux_out;
 	// 8th input is not used
 	mux_8x1_13bits mux1 (mux_out, ST0[14:12], Q_r6, Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0);
@@ -10,7 +10,7 @@ module set_time_module(output [14:0] STO, input [14:0] CTI, input [12:0] Q_r6, Q
 	supply1 Vcc;
 	wire on_off_out;
 	counter_0_1 counter_on_off(on_off_out, mux_out[12],  (~LD_O_F), Vcc, (~CLEAR), (LD_O_F | TOF), Vcc);
-	assign STO[14] = on_off_out;
+	assign STO[15] = on_off_out;
 	
 	wire or_t_d;
 	or (or_t_d, LD_TIME, LD_DAY);

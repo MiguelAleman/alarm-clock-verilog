@@ -17,7 +17,6 @@ module display_module(output [6:0] out3, out2, out1, out0, days, output AM, PM, 
 	wire B1;
 	wire [2:0] E;
 	blinker blink(B1, E, CW, CW1, S, BLINK);
-	
 	assign DBlink = E[2];
 	
 	wire [15:0] mux_out;
@@ -27,7 +26,6 @@ module display_module(output [6:0] out3, out2, out1, out0, days, output AM, PM, 
 	wire [7:0] DEC_OUT;
 	decoder_8bits decoder (DEC_OUT, mux_out[14:12], Vcc);
 	assign days = DEC_OUT[6:0];	
-	
 	
 	wire A, AM_PM;
 	wire [3:0] B;

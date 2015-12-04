@@ -5,7 +5,7 @@ module test_DATAPATH();
 	wire [6:0] display_out, days;
 	wire [3:0] segment_digit;
 	wire am, pm, dblink, Sound;
-	parameter sim_time = 1000;
+	parameter sim_time = 150000;
 	datapath datap (display_out, days, segment_digit, am, pm, dblink, Sound, Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Reset, Clk);		
 	initial #sim_time $finish;				
 	initial begin
@@ -44,11 +44,11 @@ module test_DATAPATH();
 		Next = 1'b1;
 		repeat (6) #10 Clk = ~Clk;
 		Next = 1'b0;
-		repeat (6) #10 Clk = ~Clk;
+		repeat (100) #10 Clk = ~Clk;
 	end
 	initial begin
 		$display("TEST DATAPATH");
-		$display(" Reset  Clock    A B C D   IM IH ID UPC CW1 Load LD_CT EN_ST   STO             CTO              days          display    segment_digit     D_Toggle");			
-		$monitor(" %b         %b     %b %b %b %b   %b   %b   %b  %b   %b    %b   %b   %b   %b   %b   %b       %b         %b        %b", Reset, Clk, datap.cu1.A, datap.cu1.B, datap.cu1.C, datap.cu1.D, datap.IM, datap.IH, datap.ID, datap.UPC, datap.CW1, datap.Load, datap.LD_CT, datap.EN_ST, datap.STO, datap.CTO, days, display_out, segment_digit, datap.dblink);	
+		$display(" Reset  Clock    A B C D   IM IH ID UPC CW1 Load LD_CT EN_ST   STO             CTO              days          display    segment_digit     Clear_St Clear");			
+		$monitor(" %b         %b     %b %b %b %b   %b   %b   %b  %b   %b    %b   %b   %b   %b   %b   %b       %b         %b        %b     %b", Reset, Clk, datap.cu1.A, datap.cu1.B, datap.cu1.C, datap.cu1.D, datap.IM, datap.IH, datap.ID, datap.UPC, datap.CW1, datap.Load, datap.LD_CT, datap.EN_ST, datap.STO, datap.CTO, days, display_out, segment_digit, datap.Clear_St, datap.Clear );	
 	end
 endmodule

@@ -34,11 +34,19 @@ module datapath(output [6:0] display_out, days, output [3:0] segment_digit, outp
 	
 	// SetTime
 	supply1 EN_ST;
-	set_time_module set_time(STO, CTO, Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0, Clear, TOF, S0, ID, Clear_St, LD_DAY_TIME, LD_TIME, EN_ST, IH, IM, LD_O_F);
+	set_time_module set_time(STO, CTO, Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0, Clear, TOF, S0, ID, Clear_St, LD_DAY_TIME, LD_TIME, EN_ST, IH, IM, LD_O_F, Clk);
 			
 	// Display
-	display_module display(hours1, hours0, mins1, mins0, days, am, pm, dblink, S, CW, CW1, CTO, STO, Clear, Clk);
+	wire [6:0] days_temp;
+	display_module display(hours1, hours0, mins1, mins0, days_temp, am, pm, dblink, S, CW, CW1, CTO, STO, Clear, Clk);
 	
+	assign days[0] =  days_temp[0] & (~dblink);
+	assign days[1] =  days_temp[1] & (~dblink);
+	assign days[2] =  days_temp[2] & (~dblink);
+	assign days[3] =  days_temp[3] & (~dblink);
+	assign days[4] =  days_temp[4] & (~dblink);
+	assign days[5] =  days_temp[5] & (~dblink);
+	assign days[6] =  days_temp[6] & (~dblink);
 	
 	// New Display (FPGA)
 	supply0 Gnd;

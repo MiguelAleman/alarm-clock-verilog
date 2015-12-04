@@ -7,7 +7,8 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	wire and_out_1;
 	
 	// Just for Debugging
-	and (and_out_1, clock_out[9], clock_out[8], clock_out[7], clock_out[6], clock_out[5], (~clock_out[4]), clock_out[3], (~clock_out[2]), (~clock_out[1]), (~clock_out[0]));
+	//and (and_out_1, clock_out[9], clock_out[8], clock_out[7], clock_out[6], clock_out[5], (~clock_out[4]), clock_out[3], (~clock_out[2]), (~clock_out[1]), (~clock_out[0]));
+	and (and_out_1, clock_out[0]);
 	wire count_16_clr;
 	or(count_16_clr, LD_CT, Clr_CT, and_out_1);
 	counter_16bits clock (clock_out, count_16_clr, Clk);
@@ -17,7 +18,7 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	wire or_clk_1;
 	or (or_clk_1, and_out_1, LD_CT);
 	wire [3:0] min_out_1;
-	counter_0_9 min_1 (min_out_1, CTI[3], CTI[2], CTI[1], CTI[0], LD_CT, Vcc, Clr_CT, or_clk_1, EN_CT);
+	counter_0_9 min_1 (min_out_1, CTI[3], CTI[2], CTI[1], CTI[0], LD_CT, Vcc, Clr_CT, Clk, or_clk_1);
 	
 	// 0-5
 	wire and_out_2;
@@ -26,11 +27,12 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	not (min_out_1_neg_2, min_out_1[2]);
 	not (min_out_1_neg_1, min_out_1[1]);
 	not (min_out_1_neg_0, min_out_1[0]);
-	and (and_out_2, min_out_1_neg_3, min_out_1_neg_2, min_out_1_neg_1, min_out_1_neg_0);
+	//and (and_out_2, min_out_1_neg_3, min_out_1_neg_2, min_out_1_neg_1, min_out_1_neg_0);
+	and (and_out_2, min_out_1_neg_3, min_out_1_neg_2, min_out_1_neg_1, min_out_1_neg_0, and_out_1);
 	wire or_clk_2;
 	or (or_clk_2, and_out_2, LD_CT);
 	wire [2:0] min_out_2;
-	counter_0_5 min_2 (min_out_2, CTI[6], CTI[5], CTI[4], LD_CT, Vcc, Clr_CT, or_clk_2, EN_CT);
+	counter_0_5 min_2 (min_out_2, CTI[6], CTI[5], CTI[4], LD_CT, Vcc, Clr_CT, Clk, or_clk_2);
 	
 	// Hours
 	wire and_out_3;
@@ -38,11 +40,12 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	not (min_out_2_neg_2, min_out_2[2]);
 	not (min_out_2_neg_1, min_out_2[1]);
 	not (min_out_2_neg_0, min_out_2[0]);
-	and (and_out_3, min_out_2_neg_2, min_out_2_neg_1, min_out_2_neg_0);
+	//and (and_out_3, min_out_2_neg_2, min_out_2_neg_1, min_out_2_neg_0);
+	and (and_out_3, min_out_2_neg_2, min_out_2_neg_1, min_out_2_neg_0, and_out_2);
 	wire or_clk_3;
 	or (or_clk_3, and_out_3, LD_CT);
 	wire [4:0] hour_out;
-	counter_0_23 hour (hour_out, CTI[11], CTI[10], CTI[9], CTI[8], CTI[7], LD_CT, Vcc, Clr_CT, or_clk_3, EN_CT);
+	counter_0_23 hour (hour_out, CTI[11], CTI[10], CTI[9], CTI[8], CTI[7], LD_CT, Vcc, Clr_CT, Clk, or_clk_3);
 	
 	// Days
 	wire and_out_4;
@@ -52,11 +55,12 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	not (hour_out_neg_2, hour_out[2]);
 	not (hour_out_neg_1, hour_out[1]);
 	not (hour_out_neg_0, hour_out[0]);
-	and (and_out_4, hour_out_neg_4, hour_out_neg_3, hour_out_neg_2, hour_out_neg_1, hour_out_neg_0);
+	//and (and_out_4, hour_out_neg_4, hour_out_neg_3, hour_out_neg_2, hour_out_neg_1, hour_out_neg_0);
+	and (and_out_4, hour_out_neg_4, hour_out_neg_3, hour_out_neg_2, hour_out_neg_1, hour_out_neg_0, and_out_3);
 	wire or_clk_4;
 	or (or_clk_4, and_out_4, LD_CT);
 	wire [2:0] days_out;
-	counter_0_6 days (days_out, CTI[14], CTI[13], CTI[12], LD_CT, Vcc, Clr_CT, or_clk_4, EN_CT);
+	counter_0_6 days (days_out, CTI[14], CTI[13], CTI[12], LD_CT, Vcc, Clr_CT, Clk, or_clk_4);
 	
 	// Assign bits to output
 	

@@ -16,10 +16,12 @@ module circuit(output [1:0] CW1, CW, S, output reg AlarmSet, SetDay, CS0, C0, LD
 	and (and_out_2, clock_out_2[9], clock_out_2[8], clock_out_2[7], clock_out_2[6], clock_out_2[5], (~clock_out_2[4]), clock_out_2[3], (~clock_out_2[2]), (~clock_out_2[1]), (~clock_out_2[0]));
 	
 	wire [1:0] reg_out;
-	register_2bits reg_SS (reg_out, S_neg, {SS1,SS0}, Vcc, (Clk & Load_SS), Vcc);	
+	register_2bits reg_SS (reg_out, S_neg, {SS1,SS0}, Vcc, Clk , Load_SS);	
 	assign S = reg_out;
-	counter_0_3 counter_SA (CW, Gnd, Gnd, Gnd, Vcc, (~CClr), (UPC & S[1] & S[0]), Vcc);
-	counter_0_2 counter_ST (CW1, Gnd, Gnd, Gnd, Vcc, (~CClr), (UPC & S[1] & (~S[0])), Vcc);
+	
+	counter_0_3 counter_SA (CW, Gnd, Gnd, Gnd, Vcc, (~CClr), Clk, (UPC & S[1] & S[0]));
+	counter_0_2 counter_ST (CW1, Gnd, Gnd, Gnd, Vcc, (~CClr), Clk, (UPC & S[1] & (~S[0])));
+	
 	counter_16bits counter_snz (clock_out, (~(EN_SNZ | CClr)) , Clk);
 	counter_16bits counter_stop (clock_out_2, (~(EN_STOP | CClr)), Clk);
 	

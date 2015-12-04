@@ -4,7 +4,7 @@ module counter_0_3(output reg [1:0] COUNT, input IN_1, IN_0, input LD, Up, Clr, 
 	initial begin
 		COUNT <= 2'b00;
 	end
-	always @ (posedge Clk, negedge Clr, posedge LD)
+	always @( posedge Clk, negedge Clr)
 		if (~Clr) COUNT <= 2'b00;
 		else if (LD & Enable) begin
 			COUNT[0] <= IN_0;

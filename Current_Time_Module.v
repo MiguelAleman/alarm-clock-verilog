@@ -28,7 +28,7 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	not (min_out_1_neg_1, min_out_1[1]);
 	not (min_out_1_neg_0, min_out_1[0]);
 	//and (and_out_2, min_out_1_neg_3, min_out_1_neg_2, min_out_1_neg_1, min_out_1_neg_0);
-	and (and_out_2, min_out_1_neg_3, min_out_1_neg_2, min_out_1_neg_1, min_out_1_neg_0, and_out_1);
+	and (and_out_2, min_out_1[3], min_out_1_neg_2, min_out_1_neg_1, min_out_1[0], and_out_1);
 	wire or_clk_2;
 	or (or_clk_2, and_out_2, LD_CT);
 	wire [2:0] min_out_2;
@@ -41,7 +41,7 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	not (min_out_2_neg_1, min_out_2[1]);
 	not (min_out_2_neg_0, min_out_2[0]);
 	//and (and_out_3, min_out_2_neg_2, min_out_2_neg_1, min_out_2_neg_0);
-	and (and_out_3, min_out_2_neg_2, min_out_2_neg_1, min_out_2_neg_0, and_out_2);
+	and (and_out_3, min_out_2[2], min_out_2_neg_1, min_out_2[0], and_out_2);
 	wire or_clk_3;
 	or (or_clk_3, and_out_3, LD_CT);
 	wire [4:0] hour_out;
@@ -56,7 +56,7 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	not (hour_out_neg_1, hour_out[1]);
 	not (hour_out_neg_0, hour_out[0]);
 	//and (and_out_4, hour_out_neg_4, hour_out_neg_3, hour_out_neg_2, hour_out_neg_1, hour_out_neg_0);
-	and (and_out_4, hour_out_neg_4, hour_out_neg_3, hour_out_neg_2, hour_out_neg_1, hour_out_neg_0, and_out_3);
+	and (and_out_4, hour_out[4], hour_out_neg_3,hour_out[2], hour_out[1], hour_out[0], and_out_3);
 	wire or_clk_4;
 	or (or_clk_4, and_out_4, LD_CT);
 	wire [2:0] days_out;

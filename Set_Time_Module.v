@@ -9,7 +9,7 @@ module set_time_module(output [15:0] STO, input [14:0] CTI, input [12:0] Q_r6, Q
 	// On/Off Counter
 	supply1 Vcc;
 	wire on_off_out;
-	counter_0_1 counter_on_off(on_off_out, mux_out[12],  (~LD_O_F), Vcc, (~CLEAR), (LD_O_F | TOF), Vcc);
+	counter_0_1 counter_on_off(on_off_out, mux_out[12],  (~LD_O_F), Vcc, (~CLEAR), Clk, (LD_O_F | TOF));
 	assign STO[15] = on_off_out;
 	
 	wire or_t_d;

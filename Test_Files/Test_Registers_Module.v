@@ -11,12 +11,12 @@ module test_register_module();
 	initial #sim_time $finish;				
 	initial begin
 		D = 13'b0000111111111;
-		CCE = 3'b101;
+		CCE = 3'b100;
 		STO = 3'b000;
 		#10;
 		CCE = 3'b111;
 		#10;
-		CCE = 3'b101;
+		CCE = 3'b100;
 		D = 13'b1100111111111;
 		STO = 3'b001;
 		#10;
@@ -24,13 +24,13 @@ module test_register_module();
 		STO = 3'b010;
 		D = 13'b1100110000011;
 		#10;
-		CCE = 3'b101;
+		CCE = 3'b100;
 		#10
 		CCE = 3'b111;
 		#10;
 		STO = 3'b011;
 		D = 13'b0000000000011;
-		CCE = 3'b101;
+		CCE = 3'b100;
 		#10;
 		CCE = 3'b111;
 	end

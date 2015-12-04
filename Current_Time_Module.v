@@ -7,7 +7,7 @@ module current_time_module(output [14:0] CTO, input [14:0] CTI, input LD_CT, Clr
 	wire and_out_1;
 	
 	// Just for Debugging
-	and (and_out_1, clock_out[0]);
+	and (and_out_1, clock_out[9], clock_out[8], clock_out[7], clock_out[6], clock_out[5], (~clock_out[4]), clock_out[3], (~clock_out[2]), (~clock_out[1]), (~clock_out[0]));
 	
 	//and (and_out_1, clock_out[6], clock_out[5],  clock_out[4],  clock_out[3],  clock_out[2],  clock_out[1],  clock_out[0]);
 	wire count_16_clr;

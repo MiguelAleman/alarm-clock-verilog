@@ -48,7 +48,7 @@ module test_DATAPATH();
 	end
 	initial begin
 		$display("TEST DATAPATH");
-		$display(" Reset  Clock    A B C D   IM IH ID UPC CW1 Load LD_CT EN_ST   STO   CTO");			
-		$monitor(" %b         %b     %b %b %b %b   %b   %b   %b  %b   %b    %b   %b   %b   %b   %b", Reset, Clk, datap.cu1.A, datap.cu1.B, datap.cu1.C, datap.cu1.D, datap.IM, datap.IH, datap.ID, datap.UPC, datap.CW1, datap.Load, datap.LD_CT, datap.EN_ST, datap.STO, datap.CTO);	
+		$display(" Reset  Clock    A B C D   IM IH ID UPC CW1 Load LD_CT EN_ST   STO             CTO              days          display    segment_digit     D_Toggle");			
+		$monitor(" %b         %b     %b %b %b %b   %b   %b   %b  %b   %b    %b   %b   %b   %b   %b   %b       %b         %b        %b", Reset, Clk, datap.cu1.A, datap.cu1.B, datap.cu1.C, datap.cu1.D, datap.IM, datap.IH, datap.ID, datap.UPC, datap.CW1, datap.Load, datap.LD_CT, datap.EN_ST, datap.STO, datap.CTO, days, display_out, segment_digit, datap.dblink);	
 	end
 endmodule

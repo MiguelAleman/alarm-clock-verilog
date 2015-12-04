@@ -2,12 +2,11 @@ module display_module(output [6:0] out3, out2, out1, out0, days, output AM, PM, 
 
 	// Decidir Frecuencia
 	wire and_out_1;
+	wire [15:0] counter_out;
 	and (and_out_1, counter_out[8], counter_out[7], counter_out[6], counter_out[5], counter_out[4], (~counter_out[3]), counter_out[2], (~counter_out[1]), (~counter_out[0]));
 	
 	wire count_16_clr;
 	or(count_16_clr, (~Clr), and_out_1);
-	
-	wire [15:0] counter_out;
 	counter_16bits counter (counter_out, count_16_clr, Clk);
 	
 	wire BLINK, toggle_out_neg;

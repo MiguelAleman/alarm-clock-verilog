@@ -1,4 +1,4 @@
-module datapath(output [6:0] display_out, days, output [3:0] segment_digit, output am, pm, dblink, Sound, input Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Clr, Clk);
+module datapath(output [6:0] display_out, days, output [3:0] segment_digit, output am, pm, dblink, Sound, input Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Clr, Clk, Clk_in);
 	
 	wire [6:0] hours1, hours0, mins1, mins0;
 	
@@ -51,8 +51,10 @@ module datapath(output [6:0] display_out, days, output [3:0] segment_digit, outp
 	// New Display (FPGA)
 	supply0 Gnd;
 	wire[1:0] count_out;
-	counter_0_3 counter (count_out, Vcc, Vcc, Gnd, Vcc, Vcc, Clk, Vcc);
-	decoder_4bits dec_display(segment_digit, count_out, Vcc);
+	counter_0_3_display counter (count_out, Vcc, Vcc, Gnd, Vcc, Vcc, Clk_in, Vcc);
+	wire[3:0] dec_out;
+	decoder_4bits dec_display(dec_out, count_out, Vcc);
+	assign segment_digit = ~dec_out;
 	
 	wire[6:0] mux_display_o;
 	mux_4x1_7bits mux_display(mux_display_o, count_out, hours1, hours0, mins1, mins0);

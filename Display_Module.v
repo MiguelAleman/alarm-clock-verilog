@@ -34,11 +34,13 @@ module display_module(output [6:0] out3, out2, out1, out0, days, output AM, PM, 
 	assign PM = ~AM_PM;
 	
 	wire [6:0] out_1_temp;
-	segment_7_dec segment_7_1 (out_1_temp, {1'b0, mux_out[6:4]}, E[0]);
+	//segment_7_dec segment_7_1 (out_1_temp, {1'b0, mux_out[6:4]}, E[0]);
+	segment_7_dec segment_7_1 (out_1_temp, {1'b0, mux_out[6:4]}, Vcc);
 	assign out1 = out_1_temp;
 	
 	wire [6:0] out_0_temp;
-	segment_7_dec segment_7_0 (out_0_temp, mux_out[3:0], E[0]);
+	//segment_7_dec segment_7_0 (out_0_temp, mux_out[3:0], E[0]);
+	segment_7_dec segment_7_0 (out_0_temp, mux_out[3:0], Vcc);
 	assign out0 = out_0_temp;
 	
 	reg [7:0] activate, deactivate;
@@ -51,10 +53,12 @@ module display_module(output [6:0] out3, out2, out1, out0, days, output AM, PM, 
 	mux_4x1_8bits mux_hour (mux_hours_out, {B1, mux_out[15]}, activate, deactivate, {3'b000, A, B[3:0]}, {3'b000, A, B[3:0]});
 	
 	wire [6:0] out_3_temp;
-	segment_7_dec segment_7_3 (out_3_temp, mux_hours_out[7:4], E[1]);
+	segment_7_dec segment_7_3 (out_3_temp, mux_hours_out[7:4], Vcc);
+	//segment_7_dec segment_7_3 (out_3_temp, mux_hours_out[7:4], E[1]);
 	assign out3 = out_3_temp;
 	
 	wire [6:0] out_2_temp;
-	segment_7_dec segment_7_2 (out_2_temp, mux_hours_out[3:0], E[1]);
+	segment_7_dec segment_7_2 (out_2_temp, mux_hours_out[3:0], Vcc);
+	//segment_7_dec segment_7_2 (out_2_temp, mux_hours_out[3:0], E[1]);
 	assign out2 = out_2_temp;
 endmodule

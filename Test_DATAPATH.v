@@ -1,12 +1,12 @@
 module test_DATAPATH();
 	// INPUTS
-	reg Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Reset, Clk, Clk_in;
+	reg Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Reset, Clk;
 	// OUTPUTS
 	wire [6:0] display_out, days;
 	wire [3:0] segment_digit;
-	wire am, pm, dblink, Sound;
+	wire am, pm, dblink, Sound, Vcc_out;
 	parameter sim_time = 150000;
-	datapath datap (display_out, days, segment_digit, am, pm, dblink, Sound, Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Reset, Clk, Clk_in);		
+	datapath datap (display_out, days, segment_digit, am, pm, dblink, Sound, Vcc_out, Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Reset, Clk);		
 	initial #sim_time $finish;				
 	initial begin
 		Next = 1'b0;
@@ -18,7 +18,6 @@ module test_DATAPATH();
 		Mute = 1'b0;
 		Reset = 1'b0; 
 		Clk = 1'b0;
-		assign Clk_in = Clk;
 		#10;
 		Reset = 1'b1;
 		repeat (12) #10 Clk = ~Clk;

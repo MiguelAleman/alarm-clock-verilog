@@ -1,4 +1,15 @@
-module datapath(output [6:0] display_out, days, output [3:0] segment_digit, output am, pm, dblink, Sound, input Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Clr, Clk, Clk_in);
+module datapath(output [6:0] display, days, output [3:0] segment, output am, pm, dblink, Sound, Vcc_out, input Next, Up, SetTime, SetAlarm, Snooze, Stop, Mute, Clr, Clk_sys);
+	
+
+	supply1 Vcc;
+
+	supply0 Gnd;
+
+	assign Vcc_out = Vcc;
+
+	wire Clk;
+
+	frequency_converter conv (Clk, Clk_sys, Vcc);
 	
 	wire [6:0] hours1, hours0, mins1, mins0;
 	
@@ -29,16 +40,15 @@ module datapath(output [6:0] display_out, days, output [3:0] segment_digit, outp
 	comparators_module comp_module (AA, CTO[14:12], {1'b1,CTO[11:0]} , Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0);
 	
 	// CurrentTime
-	supply1 Vcc;
-	current_time_module ct_module (CTO, STO[14:0], LD_CT, (~Clear), Clk, Vcc);	
+	current_time_module ct_module (CTO, STO[14:0], LD_CT, Clear, Clk, Vcc);	
 	
 	// SetTime
 	supply1 EN_ST;
-	set_time_module set_time(STO, CTO, Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0, Clear, TOF, S0, ID, Clear_St, LD_DAY_TIME, LD_TIME, EN_ST, IH, IM, LD_O_F, Clk);
+	set_time_module set_time(STO, CTO, Q_r6, Q_r5, Q_r4, Q_r3, Q_r2, Q_r1, Q_r0, Clear, TOF, S[0], ID, Clear_St, LD_DAY_TIME, LD_TIME, EN_ST, IH, IM, LD_O_F, Clk);
 			
 	// Display
 	wire [6:0] days_temp;
-	display_module display(hours1, hours0, mins1, mins0, days_temp, am, pm, dblink, S, CW, CW1, CTO, STO, Clear, Clk);
+	display_module display_mod(hours1, hours0, mins1, mins0, days_temp, am, pm, dblink, S, CW, CW1, CTO, STO, Clear, Clk);
 	
 	assign days[0] =  days_temp[0] & (~dblink);
 	assign days[1] =  days_temp[1] & (~dblink);
@@ -49,15 +59,14 @@ module datapath(output [6:0] display_out, days, output [3:0] segment_digit, outp
 	assign days[6] =  days_temp[6] & (~dblink);
 	
 	// New Display (FPGA)
-	supply0 Gnd;
 	wire[1:0] count_out;
-	counter_0_3_display counter (count_out, Vcc, Vcc, Gnd, Vcc, Vcc, Clk_in, Vcc);
+	counter_0_3_display counter (count_out, Vcc, Vcc, Gnd, Vcc, Vcc, Clk, Vcc);
 	wire[3:0] dec_out;
 	decoder_4bits dec_display(dec_out, count_out, Vcc);
-	assign segment_digit = ~dec_out;
+	assign segment = ~dec_out;
 	
 	wire[6:0] mux_display_o;
 	mux_4x1_7bits mux_display(mux_display_o, count_out, hours1, hours0, mins1, mins0);
-	assign display_out = ~mux_display_o;
+	assign display = ~mux_display_o;
 	
 endmodule
